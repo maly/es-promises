@@ -1,48 +1,27 @@
-Promises serial
-===============
+# Usage
 
 ```
-const tasks = getTaskArray();
-return tasks.reduce((promiseChain, currentTask) => {
-    return promiseChain.then(chainResults =>
-        currentTask.then(currentResult =>
-            [ ...chainResults, currentResult ]
-        )
-    );
-}, Promise.resolve([])).then(arrayOfResults => {
-    // Do something with all results
-});
+const tasks = [
+  task1, task2, task3, ...
+];
 ```
 
-Promises parallel
-=================
+All of them have to be `fn(resolve,reject)`, i.e. "promisable function".
 
-Promise.all(iterable)
----------------------
+# Methods
 
-Wait for all promises to be resolved, or for any to be rejected.
+## `promises.parallel(tasks)`
 
-If the returned promise resolves, it is resolved with an aggregating array of the values from the resolved promises ,in the same order as defined in the iterable of multiple promises.
+Run all tasks together and returns promise, which is fullfilled in the moment the all tasks are resolved. Result is the array of all results
 
-If it rejects, it is rejected with the reason from the first promise in the iterable that was rejected.
+## `promises.serial(tasks)`
 
-Promise.allSettled(iterable)
-----------------------------
+Run all tasks in the given order. Next task is invoked when previous is resolved. Returns promise, which is fullfilled in the moment the last tasks are resolved. Result is the array of all results
 
-Wait until all promises have settled (each may resolve or reject).
+## `promises.allSettled(tasks)`
 
-Returns a promise that resolves after all of the given promises have either resolved or rejected, with an array of objects that each describe the outcome of each promise.
+Wait until all tasks have settled (each may resolve or reject). Returns a promise that resolves after all of the given tasks have either resolved or rejected, with an array of objects that each describe the outcome of each promise.
 
-Promise.race(iterable)
-----------------------
+## `promises.race(tasks)`
 
-Wait until any of the promises is resolved or rejected.
-
-If the returned promise resolves, it is resolved with the value of the first promise in the iterable that resolved.
-
-If it rejects, it is rejected with the reason from the first promise that was rejected.
-
-Promises docs
-=============
-
-[MDN - Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+Wait until any of the task is resolved or rejected. If the returned task resolves, it is resolved with the value of the first task in the iterable that resolved. If it rejects, it is rejected with the reason from the first task that was rejected.

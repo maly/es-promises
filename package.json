@@ -1,0 +1,24 @@
+{
+  "name": "@adent/promises",
+  "version": "1.0.0",
+  "description": "Promises package",
+  "main": "promises.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maly/es-promises.git"
+  },
+  "keywords": [
+    "ES",
+    "JavaScript",
+    "Promises"
+  ],
+  "author": "Martin Maly",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maly/es-promises/issues"
+  },
+  "homepage": "https://github.com/maly/es-promises#readme"
+}
